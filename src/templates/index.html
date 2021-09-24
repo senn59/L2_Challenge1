@@ -9,6 +9,22 @@
 </head>
 <body>
     <h1>Home</h1>
-    
+    <ul>
+        {% for item in data %}
+            <li>{{item}}</li>
+        {% endfor %}
+    </ul>
+
+<script src="{{ url_for('static', filename='../static/js/jquery-3.6.0.min.js') }}"></script>
+<script src="https://cdn.socket.io/3.0.5/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
+    socket.on('timestamps', function(msg) {
+        $("ul").empty()
+        msg.data.forEach(x => {
+            $("ul").append("<li>" + x + "</i>")
+        })
+    });
+</script>
 </body>
 </html>

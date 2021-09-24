@@ -10,5 +10,5 @@ data = {"timestamp": timestamp}
 r = requests.post(webhook_url, data=json.dumps(data), headers={"Content-type": "application/json"})
 
 
-webhook = DiscordWebhook(url=discord_webhook_url, content=str(timestamp))
-response = webhook.execute()
+#webhook = DiscordWebhook(url=discord_webhook_url, content=str(timestamp))
+#response = webhook.execute()
