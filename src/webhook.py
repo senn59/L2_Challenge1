@@ -1,4 +1,3 @@
-import discord_webhook
 import requests
 import json
 from datetime import datetime
@@ -11,5 +10,5 @@ data = {"timestamp": timestamp}
 r = requests.post(webhook_url, data=json.dumps(data), headers={"Content-type": "application/json"})
 
 
-#discord_webhook = DiscordWebhook(url=discord_webhook_url, content=str(timestamp))
-#response = discord_webhook.execute()
+webhook = DiscordWebhook(url=discord_webhook_url, content=str(timestamp))
+response = webhook.execute()
