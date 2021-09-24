@@ -2,7 +2,8 @@
 
 ### Packages:
 - Flask
-- Flask-SQLAlchemy
+- Flask-SocketIO
+- Greenlet
+- Pymongo
 - Requests
-- SQLite3
 - DiscordWebhook
