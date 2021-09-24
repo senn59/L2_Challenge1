@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, request, abort
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -9,4 +9,4 @@ db = SQLAlchemy(app)
 
 class Timestamps(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.Dateti)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)

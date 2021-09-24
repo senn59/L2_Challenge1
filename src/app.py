@@ -1,9 +1,9 @@
-from flask import Flask, request, abort
+from flask import Flask, render_template ,request, abort
 
 app = Flask(__name__)
 @app.route("/")
 def hello_world():
-    return "<p>helloworld</p>"
+    return render_template("home.html")
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
