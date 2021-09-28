@@ -5,26 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>home</title>
 </head>
 <body>
     <h1>Home</h1>
     <ul>
-        {% for item in data %}
-            <li>{{item}}</li>
+        {% for x in data %}
+            <li>{{x[0]+" "+x[1]}}</li>
         {% endfor %}
     </ul>
+    <div class="bar_chart">
+        
+    </div>
 
 <script src="{{ url_for('static', filename='../static/js/jquery-3.6.0.min.js') }}"></script>
 <script src="https://cdn.socket.io/3.0.5/socket.io.min.js"></script>
-<script>
-    var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
-    socket.on('timestamps', function(msg) {
-        $("ul").empty()
-        msg.data.forEach(x => {
-            $("ul").append("<li>" + x + "</i>")
-        })
-    });
-</script>
+<script src="{{ url_for('static', filename='../static/js/main.js') }}"></script>
 </body>
 </html>

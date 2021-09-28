@@ -16,25 +16,25 @@ socketio = SocketIO(app)
 def main():
     col_data = col.find({})
     data = []
-    for x in col_data: data.append(x["timestamp"])
+    for x in col_data: data.append([x["hour"], x["date"]])
     return render_template("index.html", data=data)
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
     if request.method == "POST":
         #try:
-        timestamp = request.json
-        if type(timestamp["timestamp"]) == float:
-            #insert and get data
-            col.insert_one(timestamp)
+        webhook_data = request.json
+        if webhook_data["auth"] == "-]E.?^DuEbzS5F.r":
+            del webhook_data["auth"]
+            col.insert_one(webhook_data)
             col_data = col.find({})
 
             #put data in a list and send it
             data = []
-            for x in col_data: data.append(x["timestamp"])
-            socketio.emit("timestamps", {"data": data})
+            for x in col_data: data.append([x["hour"], x["date"]])
+            socketio.emit("new_webhook", {"data": data})
         else:
-            raise TypeError
+            print("Webhook not authorized")
         #except Exception:
         #    print("Invalid webhook data")
         return Response(status=200)
