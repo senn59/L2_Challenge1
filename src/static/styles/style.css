@@ -6,3 +6,7 @@
 h1,h2,h3 {
     opacity: 0.8;
 }
+.chart_wrapper {
+    display: flex;
+    justify-content: center;
+}
