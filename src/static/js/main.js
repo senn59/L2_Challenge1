@@ -6,19 +6,28 @@ var barChart
 $(".chart_option").on("click", function(){
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
+    socket.emit("getDayData", "")
 })
 //send signal
 function send_signal(){ 
-    socket.emit("pageload");
+    socket.emit("pageLoad", "week");
 }
 
 //structure data function for use in graph
 function structureData(data){
     let structured_data = {}
     data.forEach(x => {
-        let hour = x.split(":")[0] + ":00";
-        if (!structured_data.hasOwnProperty(hour)) structured_data[hour] = 0;
-        structured_data[hour]++;
+        //let hour = x.split(":")[0] + ":00";
+        if (!structured_data.hasOwnProperty(x)) structured_data[x] = 0;
+        structured_data[x]++;
+    })
+    return structured_data
+}
+function structureDataTemp(data){
+    let structured_data = {}
+    data.forEach(x => {
+        if (!structured_data.hasOwnProperty(x)) structured_data[x] = 0
+        structured_data[x]++
     })
     return structured_data
 }

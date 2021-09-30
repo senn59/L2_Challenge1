@@ -40,13 +40,19 @@ def webhook():
         abort(400)
 
 #send data to client once page loads
-@socketio.on("pageload")
-def pageload():
-    print(datetime.today().strftime("%d/%m/%y"))
-    col_data = col.find({"date": datetime.today().strftime("%d/%m/%y")})
+@socketio.on("pageLoad")
+def pageload(msg):
+    query = {}
+    if msg == "hour":
+        query = {"date": datetime.today().strftime("%d/%m/%y")}
+    col_data = col.find(query)
     data = []
-    for x in col_data: data.append(x["hour"])
+    for x in col_data: data.append(x["date"])
     emit("graphData", {"data": data})
 
+@socketio.on("getDayData")
+def getData(query):
+    print(query)
 if __name__ == "__main__":
     socketio.run(app, debug=True)
+

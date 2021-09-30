@@ -10,4 +10,5 @@ function structureData(data){
     })
     return structured_data
 }
-console.log(structureData(datamessy))
+//console.log(structureData(datamessy))
+console.log(new Date())
