@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from discord_webhook import DiscordWebhook
 webhook_url = "http://127.0.0.1:5000/webhook"
-discord_webhook_url = "https://discord.com/api/webhooks/890539825608945684/TAKgjjrMNvzCp3Ehx7UiEbQ9nQLWZMzU_GbhTTMVv169-beJpkiYsvpCQcgTSZ54rg10"
+discord_webhook_url = "https://discord.com/api/webhooks/892729220583800862/DGR1x-brlABE6fOKa0wLMPbWxW_-S3davpx2N46Il9TOmvqo8CvfmX9HX6_okYxSMN0Y"
 
 data = {
     "hour":datetime.today().strftime("%H:%M"),
@@ -13,5 +13,5 @@ data = {
 r = requests.post(webhook_url, data=json.dumps(data), headers={"Content-type": "application/json"})
 
 
-#webhook = DiscordWebhook(url=discord_webhook_url, content=str(data))
-#response = webhook.execute()
+webhook = DiscordWebhook(url=discord_webhook_url, content="<@179273443710205953> SENSOR WENT OFF!")
+response = webhook.execute()

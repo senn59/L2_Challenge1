@@ -1,10 +1,14 @@
 var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
-
-
-//Create graph when page loads
-
+let ctx = document.getElementById("barChart").getContext("2d");
+var data;
+var barChart
+//Settings button
+$(".chart_option").on("click", function(){
+    $(this).siblings().removeClass("active");
+    $(this).addClass("active");
+})
 //send signal
-function send_signal(){
+function send_signal(){ 
     socket.emit("pageload");
 }
 
@@ -12,53 +16,65 @@ function send_signal(){
 function structureData(data){
     let structured_data = {}
     data.forEach(x => {
-        let hour = x[0].split(":")[0] + ":00";
+        let hour = x.split(":")[0] + ":00";
         if (!structured_data.hasOwnProperty(hour)) structured_data[hour] = 0;
         structured_data[hour]++;
     })
     return structured_data
 }
+//update chart function
+function updateChart(chart, newData){
+    chart.data.labels = Object.keys(newData)
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = Object.values(newData);
+    });
+    chart.update()
+}
+
 //recieve data from server and create graph
 socket.on("graphData", function(msg){
-    let data = structureData(msg.data)
+    data = structureData(msg.data)
     //Graph
-    let ctx = document.getElementById("barChart").getContext("2d");
-    socket.barChart = new Chart(ctx, {
+    barChart = new Chart(ctx, {
         type: "bar",
         data: {
             labels: Object.keys(data),
             datasets: [
                 {
                     label: "Motion Sensed",
-                    borderColor: "rgb(57, 169, 196)",
-                    backgroundColor: "rgba(54, 215, 255, 0.4)",
+                    borderColor: "rgb(20, 80, 130)",
+                    backgroundColor: "rgba(24, 120, 200, 0.4)",
                     borderWidth: 2,
                     data: Object.values(data)
                 }
             ]
         },
         options: {
-            legend: {
-                display: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
             },
             scales: {
+                x: {
+                    grid: {
+                        color: "rgb(120,120,120)"
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grid: {
+                        color: "rgb(120,120,120)"
+                    }
                 }
-            }
+            },
+            aspectRatio: 3
         }
     })
 })
+
 //update graph when message recieved from server
 socket.on("update", function(msg) {
-    //Update graph data
-
     let newData = structureData(msg.data);
-    socket.barChart.data.labels = Object.keys(newData)
-    socket.barChart.data.datasets.forEach((dataset) => {
-        dataset.data = Object.values(newData);
-    });
-
-    console.log("test")
-    socket.barChart.update()
+    updateChart(barChart, newData)
 });

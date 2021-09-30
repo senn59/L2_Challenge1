@@ -2,11 +2,44 @@
 * {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-h1,h2,h3 {
-    opacity: 0.8;
+h1,h2,h3, i {
+    opacity: 0.6;
+}
+body {
+    background: #F8F8F8;
 }
 .chart_wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
+.header {
+    height: 80px;
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 auto;
+}
+.settings_cnt {
+    display: flex;
+}
+.chart_option {
+    background: #dcdcdc;
+    padding: 8px;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    opacity: 0.75;
+}
+.chart_option:first-child{
+    border-radius: 10px 0 0 10px;
+}
+.active {
+    background: #d0d0d0;
+    color: blue;
+    opacity: 1;
 }

@@ -29,7 +29,7 @@ def webhook():
                 col_data = col.find({"date": datetime.today().strftime("%d/%m/%y")})
                 #list and send data
                 data = []
-                for x in col_data: data.append([x["hour"], x["date"]])
+                for x in col_data: data.append(x["hour"])
                 socketio.emit("update", {"data": data})
             else:
                 print("Webhook not authorized")
@@ -45,7 +45,7 @@ def pageload():
     print(datetime.today().strftime("%d/%m/%y"))
     col_data = col.find({"date": datetime.today().strftime("%d/%m/%y")})
     data = []
-    for x in col_data: data.append([x["hour"], x["date"]])
+    for x in col_data: data.append(x["hour"])
     emit("graphData", {"data": data})
 
 if __name__ == "__main__":

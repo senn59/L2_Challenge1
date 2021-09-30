@@ -5,15 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.socket.io/3.0.5/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='../static/js/jquery-3.6.0.min.js') }}"></script>
     <title>home</title>
 </head>
 <body onload="send_signal()">
-    <h1>Home</h1>
+    <div class="header">
+        <h1>Home</h1>
+        <div class="settings_cnt">
+            <div class="chart_option bar_chart active">Day view</div>
+            <div class="chart_option line_chart">Week view</div>
+        </div>
+    </div>
     <div class="chart_wrapper">
-        <div class="chart_cnt" style="position: relative; height:20vh; width:40vw">
+        <div class="chart_cnt" style="position: relative; width:90vw;">
             <canvas id="barChart" width="200" height="200"></canvas>
         </div>
     </div>
