@@ -2,32 +2,29 @@ var socket = io.connect('http://' + document.domain + ':' + location.port + '/')
 let ctx = document.getElementById("barChart").getContext("2d");
 var data;
 var barChart
-//Settings button
-$(".chart_option").on("click", function(){
-    $(this).siblings().removeClass("active");
-    $(this).addClass("active");
-    socket.emit("getDayData", "")
-})
-//send signal
+
+//send signal when page loads
 function send_signal(){ 
     socket.emit("pageLoad", "week");
 }
+//getData when you flip the day view / week view switch
+$(".chart_option").on("click", function(){
+    $(this).siblings().removeClass("active");
+    $(this).addClass("active");
+    socket.emit("getData", $(this).attr("type"))
+})
 
 //structure data function for use in graph
 function structureData(data){
     let structured_data = {}
+    let length = 3
     data.forEach(x => {
-        //let hour = x.split(":")[0] + ":00";
+        if (x.includes(":")){
+            x = x.split(":")[0] + ":00";
+        }
+        console.log(Object.keys(structured_data).length)
         if (!structured_data.hasOwnProperty(x)) structured_data[x] = 0;
         structured_data[x]++;
-    })
-    return structured_data
-}
-function structureDataTemp(data){
-    let structured_data = {}
-    data.forEach(x => {
-        if (!structured_data.hasOwnProperty(x)) structured_data[x] = 0
-        structured_data[x]++
     })
     return structured_data
 }
@@ -39,6 +36,12 @@ function updateChart(chart, newData){
     });
     chart.update()
 }
+
+//update graph when message recieved from server
+socket.on("update", function(msg) {
+    let newData = structureData(msg.data);
+    updateChart(barChart, newData)
+});
 
 //recieve data from server and create graph
 socket.on("graphData", function(msg){
@@ -81,9 +84,3 @@ socket.on("graphData", function(msg){
         }
     })
 })
-
-//update graph when message recieved from server
-socket.on("update", function(msg) {
-    let newData = structureData(msg.data);
-    updateChart(barChart, newData)
-});
