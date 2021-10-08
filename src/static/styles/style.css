@@ -24,22 +24,27 @@ body {
     justify-content: space-between;
     align-items: flex-end;
     margin: 0 auto;
+    position: relative;
 }
 .settings_cnt {
     display: flex;
 }
 .chart_option {
-    background: #dcdcdc;
-    padding: 8px;
-    border-radius: 0 10px 10px 0;
+    margin: 15px;
     cursor: pointer;
-    opacity: 0.75;
+    opacity: 0.6;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
-.chart_option:first-child{
-    border-radius: 10px 0 0 10px;
+#barChart{
+    cursor: pointer;
 }
-.active {
-    background: #d0d0d0;
-    color: blue;
-    opacity: 1;
+.date {
+    position: absolute;
+    bottom: -90px;
+    left: 25px;
+    color: rgb(34, 34, 255);
+}
+.refresh_button:hover{
+    opacity: 0.6;
 }

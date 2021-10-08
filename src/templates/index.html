@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/b98998537c.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.socket.io/3.0.5/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='../static/js/jquery-3.6.0.min.js') }}"></script>
@@ -14,9 +14,14 @@
 <body onload="send_signal()">
     <div class="header">
         <h1>Home</h1>
+
+        <div class="date">
+            <h3></h3>
+        </div>
+
         <div class="settings_cnt">
-            <div class="chart_option active" type="date">Week view</div>
-            <div class="chart_option" type="hour">Day view</div>
+            <div class="chart_option active" type="week" field="date">Week view</div>
+            <div class="chart_option" type="day" field="hour">Day view</div>
         </div>
     </div>
     <div class="chart_wrapper">

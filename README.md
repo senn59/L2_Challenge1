@@ -1,9 +1,7 @@
 # L2_Challenge2
 
-### Packages:
+### Technologies used:
 - Flask
-- Flask-SocketIO
-- Greenlet
-- Pymongo
-- Requests
-- DiscordWebhook
+- Socketio
+- MongoDB
+- Chartjs
