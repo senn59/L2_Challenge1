@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from discord_webhook import DiscordWebhook
 webhook_url = "http://127.0.0.1:5000/webhook"
-discord_webhook_url = "https://discord.com/api/webhooks/892729220583800862/DGR1x-brlABE6fOKa0wLMPbWxW_-S3davpx2N46Il9TOmvqo8CvfmX9HX6_okYxSMN0Y"
+discord_webhook_url = ""
 
 data = {
     "hour": datetime.today().strftime("%H:%M"),
